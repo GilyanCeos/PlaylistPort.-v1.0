@@ -99,9 +99,4 @@ MIT © gilyanceos
 🔗 Créditos
 
 Spotify Web API Docs
-
-<<<<<<< HEAD
 YouTube Data API Docs
-=======
-YouTube Data API Docs
->>>>>>> 0290a45ca372eb9887959fe35dd37736762da26c
