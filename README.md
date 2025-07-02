@@ -69,15 +69,15 @@ python app.py
 ```
 Acesse http://localhost:5000 no navegador.
 
-✨ Contribuições
+## Contribuições
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
 
-📄 Licença
+## Licença
 
 MIT © gilyanceos
 
-🔗 Créditos
+## Créditos
 
 Spotify Web API Docs
 
