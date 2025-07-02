@@ -24,6 +24,7 @@
 ### 1. Clone o repositório
 
 bash
+
 git clone https://github.com/GilyanCeos/repo-playlistport-v0.git
 
 cd repo-playlistport-v0.git
@@ -31,10 +32,6 @@ cd repo-playlistport-v0.git
 ### 2. Crie e ative um ambiente virtual #####(opcional mas recomendado)
 
 bash
-
-Copiar
-
-Editar
 
 python -m venv venv
 
@@ -46,10 +43,6 @@ venv\Scripts\activate       # Windows
 
 bash
 
-Copiar
-
-Editar
-
 pip install -r requirements.txt
 
 ### 4. Configure as credenciais
@@ -57,10 +50,6 @@ pip install -r requirements.txt
 Crie um arquivo .env na raiz do projeto com o seguinte conteúdo:
 
 env
-
-Copiar
-
-Editar
 
 SPOTIFY_CLIENT_ID=your_spotify_client_id
 
@@ -79,10 +68,6 @@ YOUTUBE_REDIRECT_URI=http://localhost:5000/callback/youtube
 ### 5. Execute a aplicação
 
 bash
-
-Copiar
-
-Editar
 
 python app.py
 
