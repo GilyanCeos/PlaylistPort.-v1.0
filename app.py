@@ -15,7 +15,7 @@ app.secret_key = os.urandom(24)
 SPOTIFY_CLIENT_ID = os.getenv('SPOTIFY_CLIENT_ID')
 SPOTIFY_CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
 SPOTIFY_REDIRECT_URI = os.getenv('SPOTIFY_REDIRECT_URI')
-SPOTIFY_SCOPE = 'playlist-read-private user-library-read'
+SPOTIFY_SCOPE = 'playlist-read-private playlist-modify-private'
 
 # ----- Configurações YouTube -----
 YOUTUBE_CLIENT_ID = os.getenv('YOUTUBE_CLIENT_ID')
@@ -162,6 +162,62 @@ def sync():
         )
 
     return f'Playlist criada com {len(video_ids)} vídeos no YouTube!'
+
+# ----- Sincronização YouTube → Spotify -----
+@app.route('/reverse-sync')
+def reverse_sync():
+    if 'spotify_token' not in session or 'youtube_token' not in session:
+        return 'Por favor, autentique-se no Spotify e YouTube primeiro.'
+
+    playlist_id = request.args.get('playlistId')
+    if not playlist_id:
+        return 'Forneça o ID da playlist do YouTube como parâmetro ?playlistId='
+
+    youtube_token = session['youtube_token']
+    spotify_token = session['spotify_token']
+
+    yt_headers = {
+        'Authorization': f"Bearer {youtube_token}"  
+    }
+    yt_url = f"https://www.googleapis.com/youtube/v3/playlistItems"
+    yt_params = {
+        'part': 'snippet',
+        'playlistId': playlist_id,
+        'maxResults': 50
+    }
+    yt_response = requests.get(yt_url, headers=yt_headers, params=yt_params)
+    items = yt_response.json().get('items', [])
+
+    track_uris = []
+    for item in items:
+        title = item['snippet']['title']
+        search_url = "https://api.spotify.com/v1/search"
+        params = {
+            'q': title,
+            'type': 'track',
+            'limit': 1
+        }
+        headers_spotify = { 'Authorization': f"Bearer {spotify_token}" }
+        search_response = requests.get(search_url, headers=headers_spotify, params=params)
+        results = search_response.json().get('tracks', {}).get('items', [])
+        if results:
+            track_uris.append(results[0]['uri'])
+
+    user_profile = requests.get("https://api.spotify.com/v1/me", headers=headers_spotify)
+    user_id = user_profile.json().get('id')
+    create_url = f"https://api.spotify.com/v1/users/{user_id}/playlists"
+    playlist_data = {
+        'name': 'Playlist importada do YouTube',
+        'description': 'Gerada pelo Playlist Port',
+        'public': False
+    }
+    create_response = requests.post(create_url, headers=headers_spotify, data=json.dumps(playlist_data))
+    playlist_id_spotify = create_response.json().get('id')
+
+    add_url = f"https://api.spotify.com/v1/playlists/{playlist_id_spotify}/tracks"
+    requests.post(add_url, headers=headers_spotify, data=json.dumps({ 'uris': track_uris }))
+
+    return f'Playlist criada com {len(track_uris)} músicas no Spotify!'
 
 if __name__ == '__main__':
     app.run(debug=True)
