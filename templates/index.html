@@ -1,56 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Playlist Port</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlaylistPort - Conecte suas Playlists</title>
+
+    <!-- Google Fonts - Rajdhani e Michroma -->
+    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+    <link href="[https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@300;400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@300;400;500;600;700&display=swap)" rel="stylesheet">
+
+    <!-- Seu arquivo CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body class="dark-mode">
-  <div class="container">
-    <header>
-      <h1 class="app-title">PLAYLIST PORT</h1>
-    </header>
+<body>
+    <div class="main-container">
+        <h1 class="main-title">PlaylistPort.</h1>
+        <p class="description">Sincronize suas músicas favoritas entre plataformas de forma rápida e automática. Para começar, conecte suas contas abaixo.</p>
 
-    <section class="your-playlists">
-      <h2>Suas Playlists</h2>
-      <div class="playlist-grid">
-        <div class="playlist-card">Road Trip</div>
-        <div class="playlist-card">Chill Vibes</div>
-        <div class="playlist-card">Workout</div>
-        <div class="playlist-card add-new">+</div>
-      </div>
-    </section>
+        <div class="auth-buttons">
+            <button class="btn btn-spotify">Conecte com Spotify</button>
+            <button class="btn btn-youtube">Conecte com YouTube</button>
+        </div>
 
-    <section class="recommended">
-      <h2>Recomendados</h2>
-      <div class="recommended-list">
-        <div class="recommended-item" onclick="location.href='/player'">
-          <div class="album-cover blue"></div>
-          <div class="album-info">
-            <p class="album-title">Night Drive</p>
-            <p class="album-artist">Artist Name</p>
-          </div>
-        </div>
-        <div class="recommended-item">
-          <div class="album-cover lines"></div>
-          <div class="album-info">
-            <p class="album-title">Electric Flow</p>
-            <p class="album-artist">DJ Wave</p>
-          </div>
-        </div>
-        <!-- Adicione mais blocos se quiser -->
-      </div>
-    </section>
+        <!-- O botão "Sync-Now" separado, como na imagem -->
+        <button class="btn btn-sync-now">Sync-Now</button>
 
-    <footer class="mini-player">
-      <div class="player-bar" onclick="location.href='/player'">
-        <div class="song-info">
-          <p class="song-title">Song Title</p>
-          <p class="song-artist">Artist Name</p>
-        </div>
-        <div class="playback-controls">▶️</div>
-      </div>
-    </footer>
-  </div>
+        <!-- Mensagem de feedback (sucesso/erro), inicialmente oculta -->
+        <div id="feedback-message" class="feedback-message hidden"></div>
+    </div>
 </body>
 </html>

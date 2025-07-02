@@ -1,0 +1,192 @@
+/* static/css/style.css */
+
+/* Variáveis de Cor */
+:root {
+    --cor-fundo-geral: #000000; /* Preto puro para o fundo */
+    --cor-texto-principal: #F0F0F0; /* Branco suave */
+    --azul-botao-normal: #0066CC; /* Azul para botões */
+    --azul-botao-hover: #3399FF; /* Azul mais brilhante para hover / glow */
+    --azul-titulo-glow: #00FFFF; /* Ciano para o glow do título */
+    --verde-conectado: #009900; /* Verde para estado conectado */
+    --verde-sucesso-glow: #39FF14; /* Verde neon para sucesso */
+    --vermelho-erro: #FF3333; /* Vermelho para erro */
+}
+
+/* Estilos Globais e Reset Básico */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--cor-fundo-geral);
+    color: var(--cor-texto-principal);
+    font-family: 'Rajdhani', sans-serif; /* Fonte principal para o corpo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ocupa a altura total da viewport */
+    text-align: center;
+    overflow: hidden; /* Para evitar scroll se houver glows */
+    font-size: 16px; /* Base para rem */
+    /* --- BORDAS DE DEPURACAO TEMPORARIAS --- */
+    border: 2px dashed red; /* Verifique se o CSS está sendo carregado */
+    /* --- FIM BORDAS DE DEPURACAO --- */
+}
+
+/* Container Principal - Centraliza todo o conteúdo */
+.main-container {
+    max-width: 700px; /* Largura máxima para o conteúdo */
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* --- BORDAS DE DEPURACAO TEMPORARIAS --- */
+    border: 2px solid green; /* Verifique o tamanho e posicionamento do container */
+    /* --- FIM BORDAS DE DEPURACAO --- */
+}
+
+/* Tipografia */
+.main-title {
+    font-family: 'Michroma', sans-serif; /* Fonte para o título principal */
+    font-weight: 400; /* Regular (único peso) */
+    font-size: 4em; /* Tamanho grande para o título */
+    margin-bottom: 20px;
+    color: var(--cor-texto-principal);
+    text-shadow: 0 0 15px var(--azul-titulo-glow), 0 0 25px var(--azul-titulo-glow); /* Efeito de brilho neon no título */
+    letter-spacing: 2px; /* Espaçamento entre letras para efeito digital */
+}
+
+.description {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 300; /* Light */
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 500px; /* Limita a largura do texto para melhor leitura */
+}
+
+/* Grupo de Botões de Autenticação (lado a lado) */
+.auth-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 25px; /* Espaçamento entre os botões */
+    margin-bottom: 30px; /* Espaço antes do botão Sync-Now */
+    flex-wrap: wrap; /* Permite que os botões quebrem a linha em telas menores */
+    justify-content: center;
+}
+
+/* Estilo Base para Todos os Botões */
+.btn {
+    background-color: var(--azul-botao-normal);
+    color: var(--cor-texto-principal);
+    border: none;
+    padding: 18px 35px;
+    border-radius: 8px; /* Cantos arredondados */
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600; /* Semi-Bold para o texto do botão */
+    font-size: 1.3em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase; /* Texto em maiúsculas */
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.3); /* Sutil glow inicial */
+    min-width: 220px; /* Garante largura mínima para botões */
+}
+
+.btn:hover {
+    background-color: var(--azul-botao-hover);
+    box-shadow: 0 0 20px var(--azul-botao-hover), 0 0 30px rgba(0, 255, 255, 0.5); /* Glow mais intenso no hover */
+    transform: translateY(-3px); /* Efeito de leve elevação */
+}
+
+/* Estilo Específico para o Botão Sync-Now */
+.btn-sync-now {
+    background-color: var(--azul-botao-normal); /* Mesmo azul dos outros botões */
+    color: var(--cor-texto-principal);
+    padding: 18px 50px; /* Mais largo */
+    font-size: 1.4em; /* Um pouco maior */
+    min-width: 250px; /* Garante largura mínima */
+}
+
+.btn-sync-now:hover {
+    background-color: var(--azul-botao-hover);
+    box-shadow: 0 0 20px var(--azul-botao-hover), 0 0 30px rgba(0, 255, 255, 0.5);
+    transform: translateY(-3px);
+}
+
+/* ESTADOS DOS BOTÕES (conectado / erro) - para futura implementação JS */
+.btn.connected {
+    background-color: var(--verde-conectado);
+    cursor: default;
+    box-shadow: 0 0 20px var(--verde-sucesso-glow), 0 0 30px rgba(57, 255, 20, 0.5); /* Glow verde intenso para conectado */
+    opacity: 0.9;
+    transform: none; /* Remove elevação */
+}
+
+.btn.connected:hover {
+    background-color: var(--verde-conectado); /* Não muda no hover quando conectado */
+    box-shadow: 0 0 20px var(--verde-sucesso-glow), 0 0 30px rgba(57, 255, 20, 0.5);
+}
+
+/* MENSAGENS DE FEEDBACK */
+.feedback-message {
+    margin-top: 30px;
+    padding: 18px 25px;
+    border-radius: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: var(--cor-texto-principal);
+    text-shadow: 0 0 5px var(--cor-texto-principal);
+    max-width: 400px;
+    width: 100%;
+}
+
+.feedback-message.success {
+    background-color: rgba(57, 255, 20, 0.15); /* Fundo semi-transparente do verde neon */
+    border: 1px solid var(--verde-sucesso-glow);
+    box-shadow: 0 0 15px var(--verde-sucesso-glow);
+}
+
+.feedback-message.error {
+    background-color: rgba(255, 51, 51, 0.15); /* Fundo semi-transparente do vermelho */
+    border: 1px solid var(--vermelho-erro);
+    box-shadow: 0 0 15px var(--vermelho-erro);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 600px) {
+    .main-title {
+        font-size: 3em;
+    }
+    .description {
+        font-size: 1em;
+    }
+    .auth-buttons {
+        flex-direction: column; /* Botões um abaixo do outro em telas pequenas */
+        gap: 15px;
+    }
+    .btn {
+        font-size: 1.1em;
+        padding: 15px 25px;
+        min-width: unset; /* Remove largura mínima em telas pequenas */
+        width: 100%; /* Ocupa a largura total disponível */
+    }
+    .btn-sync-now {
+        font-size: 1.2em;
+        padding: 15px 30px;
+        min-width: unset;
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .main-title {
+        font-size: 2.5em;
+    }
+    .main-container {
+        padding: 20px 15px;
+    }
+}

@@ -1,7 +1,7 @@
 import os
 import requests
 import json
-from flask import Flask, redirect, request, session, url_for
+from flask import Flask, redirect, request, session, url_for, render_template # Adicione render_template aqui
 from dotenv import load_dotenv
 from urllib.parse import urlencode
 
@@ -27,13 +27,7 @@ YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
 # ----- Rotas principais -----
 @app.route('/')
 def index():
-    return '''
-        <h1>Playlist Port</h1>
-        <p>Sincronize suas playlists entre plataformas</p>
-        <a href="/login/spotify">Conectar com Spotify</a><br>
-        <a href="/login/youtube">Conectar com YouTube</a><br><br>
-        <a href="/sync">Sincronizar Playlist</a>
-    '''
+    return render_template('index.html') # <--- MUDANÇA AQUI!
 
 # ----- Autenticação Spotify -----
 @app.route('/login/spotify')
@@ -97,7 +91,9 @@ def sync():
     youtube_token = session['youtube_token']
 
     # Pegando tracks do Spotify (playlist fixa ou editável)
-    playlist_id = 'collection/tracks'
+    # ATENÇÃO: 'collection/tracks' não é um ID de playlist válido para a API do Spotify.
+    # Você precisará obter um ID de playlist real do usuário ou usar 'me/tracks' para músicas salvas.
+    playlist_id = 'collection/tracks' # <--- ISSO PROVAVELMENTE CAUSARÁ ERRO NA API DO SPOTIFY
     headers_spotify = { 'Authorization': f"Bearer {spotify_token}" }
     tracks_url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks"
     response = requests.get(tracks_url, headers=headers_spotify)
