@@ -1,34 +1,77 @@
-# repo-playlistport-v0
+### PlaylistPort
 
-🌐 Tecnologias que vamos usar:
-Python 3
-Flask (para o servidor web)
-Requests (para chamadas HTTP)
-OAuth 2.0 (padrão de autenticação das APIs)
+**PlaylistPort** é uma aplicação que permite sincronizar playlists do Spotify com o YouTube. Ideal para quem deseja fazer backup, migrar listas entre plataformas ou encontrar clipes de suas músicas favoritas de forma automatizada.
 
-⚙️ Requisitos:
-Conta de desenvolvedor:
-Spotify Developer Dashboard
-Google Cloud Console (YouTube API)
+## Funcionalidades
 
-Crie dois apps para obter:
-Client ID / Client Secret (Spotify)
-Client ID / Client Secret (YouTube/Google OAuth)
+- 🔐 Autenticação via Spotify e YouTube (OAuth 2.0)
+- 📂 Leitura de playlists e músicas do Spotify
+- 🔍 Busca automática dos vídeos no YouTube
+- 📺 Criação de uma nova playlist no YouTube com os clipes encontrados
+- ✅ Totalmente baseado em API oficial de ambas as plataformas
 
-BASH
-pip install flask requests
+## Tecnologias Utilizadas
 
-🧪 Estrutura básica do app:
-app.py – Backend Flask com autenticação Spotify + YouTube
+- Python 3
+- Flask
+- Requests
+- YouTube Data API v3
+- Spotify Web API
+- python-dotenv
 
-✅ Resultado:
-Você poderá:
-Acessar http://localhost:5000
-Fazer login com Spotify e YouTube
-Armazenar os tokens de cada serviço na sessão
-Usar esses tokens depois para ler playlists e criar no YouTube
+## Instalação e Execução
 
-🚀 Próximo passo:
-Ler playlists do Spotify usando o token
-Buscar vídeos equivalentes no YouTube
-Criar uma nova playlist no YouTube com os resultados
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/GilyanCeos/repo-playlistport-v0.git
+cd repo-playlistport-v0.git
+
+### 2. Crie e ative um ambiente virtual (opcional mas recomendado)
+
+bash
+Copiar
+Editar
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+
+### 3. Instale as dependências
+
+bash
+Copiar
+Editar
+pip install -r requirements.txt
+
+### 4. Configure as credenciais
+
+Crie um arquivo .env na raiz do projeto com o seguinte conteúdo:
+env
+Copiar
+Editar
+SPOTIFY_CLIENT_ID=your_spotify_client_id
+SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+SPOTIFY_REDIRECT_URI=http://localhost:5000/callback/spotify
+
+YOUTUBE_CLIENT_ID=your_youtube_client_id
+YOUTUBE_CLIENT_SECRET=your_youtube_client_secret
+YOUTUBE_REDIRECT_URI=http://localhost:5000/callback/youtube
+<i>⚠️ Importante: não compartilhe esse arquivo. Ele está protegido no .gitignore. </i>
+
+### 5. Execute a aplicação
+
+bash
+Copiar
+Editar
+python app.py
+Acesse http://localhost:5000 no navegador.
+
+✨ Contribuições
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
+
+📄 Licença
+MIT © gilyanceos
+
+🔗 Créditos
+Spotify Web API Docs
+YouTube Data API Docs
