@@ -1,4 +1,4 @@
-### PlaylistPort
+# PlaylistPort
 
 **PlaylistPort** é uma aplicação que permite sincronizar playlists do Spotify com o YouTube. Ideal para quem deseja fazer backup, migrar listas entre plataformas ou encontrar clipes de suas músicas favoritas de forma automatizada.
 
@@ -23,55 +23,81 @@
 
 ### 1. Clone o repositório
 
-```bash
+bash
 git clone https://github.com/GilyanCeos/repo-playlistport-v0.git
+
 cd repo-playlistport-v0.git
 
-### 2. Crie e ative um ambiente virtual (opcional mas recomendado)
+### 2. Crie e ative um ambiente virtual #####(opcional mas recomendado)
 
 bash
+
 Copiar
+
 Editar
+
 python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
+
+source venv/bin/activate    # Linux/Mac
+
+venv\Scripts\activate       # Windows
 
 ### 3. Instale as dependências
 
 bash
+
 Copiar
+
 Editar
+
 pip install -r requirements.txt
 
 ### 4. Configure as credenciais
 
 Crie um arquivo .env na raiz do projeto com o seguinte conteúdo:
+
 env
+
 Copiar
+
 Editar
+
 SPOTIFY_CLIENT_ID=your_spotify_client_id
+
 SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+
 SPOTIFY_REDIRECT_URI=http://localhost:5000/callback/spotify
 
 YOUTUBE_CLIENT_ID=your_youtube_client_id
+
 YOUTUBE_CLIENT_SECRET=your_youtube_client_secret
+
 YOUTUBE_REDIRECT_URI=http://localhost:5000/callback/youtube
-<i>⚠️ Importante: não compartilhe esse arquivo. Ele está protegido no .gitignore. </i>
+
+⚠️Importante: não compartilhe esse arquivo. Ele está protegido no .gitignore.
 
 ### 5. Execute a aplicação
 
 bash
+
 Copiar
+
 Editar
+
 python app.py
+
 Acesse http://localhost:5000 no navegador.
 
 ✨ Contribuições
+
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
 
 📄 Licença
+
 MIT © gilyanceos
 
 🔗 Créditos
+
 Spotify Web API Docs
+
 YouTube Data API Docs

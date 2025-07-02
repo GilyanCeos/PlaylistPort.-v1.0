@@ -1,10 +1,43 @@
-# Ignorar arquivos sensíveis e temporários
-.env
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*.log
+*$py.class
+
+# Flask env files
+.env
+*.env
+
+# VS Code settings
 .vscode/
-*.sqlite3
-.venv/
-env/
+
+# Virtual environments
 venv/
+env/
+ENV/
+.venv/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# IDEs / OS files
+.DS_Store
+Thumbs.db
+
+# Python notebooks
+*.ipynb_checkpoints
+
+# Cache
+.cache/
+*.sqlite3
+
+# Personal tokens
+secrets.json
+config.json
+
+# Mac/Linux hidden files
+*.swp
