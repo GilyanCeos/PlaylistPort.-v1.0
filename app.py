@@ -40,7 +40,7 @@ def login_spotify():
     }
     return redirect(f"https://accounts.spotify.com/authorize?{urlencode(params)}")
 
-@app.route('/callback/spotify')
+    @app.route('/callback/spotify')
 def callback_spotify():
     code = request.args.get('code')
     token_url = "https://accounts.spotify.com/api/token"
@@ -51,8 +51,11 @@ def callback_spotify():
         'client_id': SPOTIFY_CLIENT_ID,
         'client_secret': SPOTIFY_CLIENT_SECRET
     })
-    session['spotify_token'] = response.json().get('access_token')
-    return redirect(url_for('index'))
+    if response.status_code == 200:
+        session['spotify_token'] = response.json().get('access_token')
+        return redirect(url_for('index', auth_status='success', service='spotify')) # Adicionado
+    else:
+        return redirect(url_for('index', auth_status='error', service='spotify')) # Adicionado
 
 # ----- Autenticação YouTube -----
 @app.route('/login/youtube')
@@ -67,7 +70,7 @@ def login_youtube():
     }
     return redirect(f"https://accounts.google.com/o/oauth2/auth?{urlencode(params)}")
 
-@app.route('/callback/youtube')
+    @app.route('/callback/youtube')
 def callback_youtube():
     code = request.args.get('code')
     token_url = "https://oauth2.googleapis.com/token"
@@ -78,8 +81,11 @@ def callback_youtube():
         'client_id': YOUTUBE_CLIENT_ID,
         'client_secret': YOUTUBE_CLIENT_SECRET
     })
-    session['youtube_token'] = response.json().get('access_token')
-    return redirect(url_for('index'))
+    if response.status_code == 200:
+        session['youtube_token'] = response.json().get('access_token')
+        return redirect(url_for('index', auth_status='success', service='youtube')) # Adicionado
+    else:
+        return redirect(url_for('index', auth_status='error', service='youtube')) # Adicionado
 
 # ----- Sincronização -----
 @app.route('/sync')
