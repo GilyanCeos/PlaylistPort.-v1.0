@@ -40,7 +40,7 @@ def login_spotify():
     }
     return redirect(f"https://accounts.spotify.com/authorize?{urlencode(params)}")
 
-    @app.route('/callback/spotify')
+@app.route('/callback/spotify')
 def callback_spotify():
     code = request.args.get('code')
     token_url = "https://accounts.spotify.com/api/token"
@@ -70,7 +70,7 @@ def login_youtube():
     }
     return redirect(f"https://accounts.google.com/o/oauth2/auth?{urlencode(params)}")
 
-    @app.route('/callback/youtube')
+@app.route('/callback/youtube')
 def callback_youtube():
     code = request.args.get('code')
     token_url = "https://oauth2.googleapis.com/token"
