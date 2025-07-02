@@ -1,45 +1,37 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlaylistPort - Conecte suas Playlists</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlaylistPort - Conecte suas Playlists</title>
 
-    <!-- Google Fonts - Rajdhani e Michroma -->
-    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-    <link href="[https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@300;400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@300;400;500;600;700&display=swap)" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Seu arquivo CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- Estilo -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    <div class="main-container">
-        <h1 class="main-title">PlaylistPort.</h1>
-        <p class="description">Sincronize suas músicas favoritas entre plataformas de forma rápida e automática. Para começar, conecte suas contas abaixo.</p>
+<body class="dark-mode">
+  <div class="main-container">
+    <h1 class="main-title">PlaylistPort.</h1>
+    <p class="description">Sincronize suas músicas favoritas entre plataformas de forma rápida e automática. Para começar, conecte suas contas abaixo.</p>
 
-        <div class="auth-buttons">
-            <button class="btn btn-spotify">Conecte com Spotify</button>
-            <button class="btn btn-youtube">Conecte com YouTube</button>
-        </div>
-
-        <!-- O botão "Sync-Now" separado, como na imagem -->
-        <button class="btn btn-sync-now">Sync-Now</button>
-
-        <!-- Mensagem de feedback (sucesso/erro), inicialmente oculta -->
-        <div id="feedback-message" class="feedback-message hidden"></div>
-
-        <!-- Mensagem de transparência -->
-        <h1> Playlist Port</h1>
-
-        <p><small>Este app solicitará acesso apenas para ler e criar suas playlists. Nunca acessamos ou controlamos outras partes da sua conta.</small></p>
-
-        <p>Transfira suas playlists entre Spotify e YouTube com 1 clique.</p>
-        <a href="/login/spotify">🔐 Conectar com Spotify</a><br>
-        <a href="/login/youtube">🔐 Conectar com YouTube</a><br><br>
-        <a href="/sync">🚀 Sincronizar Playlist</a>
+    <div class="auth-buttons">
+      <button class="btn btn-spotify">Conectar com Spotify</button>
+      <button class="btn btn-youtube">Conectar com YouTube</button>
     </div>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-  
-    </body>
+
+    <button class="btn btn-sync-now">Sync-Now</button>
+
+    <div id="feedback-message" class="feedback-message hidden"></div>
+
+    <footer class="footer-note">
+      <p><small>🔒 Este app solicitará acesso apenas para ler e criar suas playlists. Nunca acessamos ou controlamos outras partes da sua conta.</small></p>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
 </html>
