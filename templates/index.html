@@ -1,37 +1,57 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html><html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PlaylistPort - Conecte suas Playlists</title>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
-
-  <!-- Estilo -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>PlaylistPort - Nuclear Neon Interface</title>
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body class="dark-mode">
-  <div class="main-container">
-    <h1 class="main-title">PlaylistPort.</h1>
-    <p class="description">Sincronize suas músicas favoritas entre plataformas de forma rápida e automática. Para começar, conecte suas contas abaixo.</p>
+<body class="neon-theme">
+  <div class="window-frame">
+    <div class="window-header">
+      <div class="window-title">PlaylistPort.EX</div>
+      <div class="window-controls">
+        <span class="btn-control close"></span>
+        <span class="btn-control minimize"></span>
+        <span class="btn-control maximize"></span>
+      </div>
+    </div><div class="window-body">
+  <aside class="sidebar-menu">
+    <h2 class="sidebar-title">MENU</h2>
+    <ul class="menu-list">
+      <li><button class="menu-btn">SPOTIFY</button></li>
+      <li><button class="menu-btn">YOUTUBE</button></li>
+      <li><button class="menu-btn">SYNC NOW</button></li>
+      <li><button class="menu-btn">SOBRE</button></li>
+    </ul>
+  </aside>
 
-    <div class="auth-buttons">
+  <main class="main-panel">
+    <div class="panel-header">
+      <h1 class="neon-title">PlaylistPort.</h1>
+      <p class="description">Transfira playlists entre Spotify e YouTube com estilo e tecnologia.</p>
+    </div>
+
+    <div class="connection-panel">
       <button class="btn btn-spotify">Conectar com Spotify</button>
       <button class="btn btn-youtube">Conectar com YouTube</button>
     </div>
 
-    <button class="btn btn-sync-now">Sync-Now</button>
+    <div class="sync-section">
+      <button class="btn btn-sync-now">SYNC-PORT.EXE</button>
+      <div id="feedback-message" class="feedback-message hidden"></div>
+    </div>
+  </main>
+</div>
 
-    <div id="feedback-message" class="feedback-message hidden"></div>
-
-    <footer class="footer-note">
-      <p><small>🔒 Este app solicitará acesso apenas para ler e criar suas playlists. Nunca acessamos ou controlamos outras partes da sua conta.</small></p>
-    </footer>
+<div class="window-footer">
+  <div class="system-info">
+    CPU: i5-4200H | RAM: 6GB | Status: ONLINE
   </div>
+  <div class="copyright">
+    XUX-EX Framework UI © 2025
+  </div>
+</div>
 
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
+  </div>  <script src="{{ url_for('static', filename='js/script.js') }}"></script></body>
 </html>
