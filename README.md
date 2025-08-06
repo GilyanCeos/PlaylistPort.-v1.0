@@ -45,20 +45,19 @@ pip install -r requirements.txt
 ```
 ### 4. Configure as credenciais
 
-Crie um arquivo .env na raiz do projeto com o seguinte conteúdo:
+- Obtenha suas chaves de API do Spotify e do YouTube.
+
+- Renomeie o arquivo `.env.example` para `.env` na raiz do projeto e preencha com suas chaves:
 
 ```env
 SPOTIFY_CLIENT_ID=your_spotify_client_id
-
 SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
-
-SPOTIFY_REDIRECT_URI=http://localhost:5000/callback/spotify
+SPOTIFY_REDIRECT_URI=http://127.0.0.1:5000/callback/spotify
 
 YOUTUBE_CLIENT_ID=your_youtube_client_id
-
 YOUTUBE_CLIENT_SECRET=your_youtube_client_secret
-
-YOUTUBE_REDIRECT_URI=http://localhost:5000/callback/youtube
+YOUTUBE_REDIRECT_URI=http://127.0.0.1:5000/callback/youtube
+YOUTUBE_API_KEY=SUA_CHAVE_DE_API_DO_YOUTUBE
 ```
 ⚠️Importante: não compartilhe esse arquivo. Ele está protegido no .gitignore.
 
@@ -67,7 +66,7 @@ YOUTUBE_REDIRECT_URI=http://localhost:5000/callback/youtube
 ```bash
 python app.py
 ```
-Acesse http://localhost:5000 no navegador.
+- Acesse http://127.0.0.1:5000/ no navegador.
 
 ## Contribuições
 
@@ -75,7 +74,7 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull r
 
 ## Licença
 
-MIT © gilyanceos
+Este projeto está licenciado sob a [Creative Commons Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/deed.pt_BR). Consulte o arquivo [LICENSE](./license.md) para mais informações.
 
 ## Créditos
 

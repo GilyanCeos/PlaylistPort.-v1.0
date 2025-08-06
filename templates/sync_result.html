@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sincronização Concluída</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <body class="neon-theme">
+  <div class="window-frame">
+    <div class="window-header">
+      <div class="window-title">PlaylistPort.</div>
+      <div class="window-controls">
+        <span class="btn-control close"></span>
+        <span class="btn-control minimize"></span>
+        <span class="btn-control maximize"></span>
+      </div>
+    </div>
+    <div class="window-body">
+      <main class="main-panel">
+        <div class="panel-header">
+        <h1 class="neon-title">Sincronização Concluída!</h1>
+        <p class="description">{{ message }}</p>
+        <div class="buttons">
+            <a href="{{ url_for('index') }}" class="button primary">Voltar para a Página Inicial</a>
+        </div>
+    </div>
+</body>
+</html>

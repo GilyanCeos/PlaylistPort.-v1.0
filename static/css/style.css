@@ -18,115 +18,203 @@ body {
     padding: 0;
     background-color: var(--cor-fundo-geral);
     color: var(--cor-texto-principal);
-    font-family: 'Rajdhani', sans-serif; /* Fonte principal para o corpo */
+    font-family: 'Rajdhani', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Ocupa a altura total da viewport */
+    min-height: 100vh;
     text-align: center;
-    overflow: hidden; /* Para evitar scroll se houver glows */
-    font-size: 16px; /* Base para rem */
-    /* --- BORDAS DE DEPURACAO TEMPORARIAS --- */
-    border: 2px dashed red; /* Verifique se o CSS está sendo carregado */
-    /* --- FIM BORDAS DE DEPURACAO --- */
+    overflow: hidden;
+    font-size: 16px;
 }
 
-/* Container Principal - Centraliza todo o conteúdo */
-.main-container {
-    max-width: 700px; /* Largura máxima para o conteúdo */
-    padding: 40px 20px;
+/* Neon Theme Base */
+body.neon-theme {
+    background-color: #0a0a0a;
+    color: var(--cor-texto-principal);
+}
+
+/* Window Frame - Container geral da "janela" */
+.window-frame {
+    width: 720px;
+    max-width: 95vw;
+    background: #111;
+    border: 2px solid #00ffff;
+    border-radius: 12px;
+    box-shadow:
+        0 0 10px #00ffff,
+        0 0 40px #00ffff,
+        inset 0 0 10px #00ffff;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+}
+
+/* Window Header */
+.window-header {
+    background: #000;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #00ffff;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+/* Título da janela */
+.window-title {
+    font-family: 'Michroma', sans-serif;
+    font-size: 1.5em;
+    color: var(--cor-texto-principal);
+    text-shadow:
+        0 0 5px var(--azul-titulo-glow),
+        0 0 10px var(--azul-titulo-glow);
+}
+
+/* Controles da janela (fechar, minimizar, maximizar) */
+.window-controls {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-control {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    transition: box-shadow 0.3s ease;
+    border: 1.5px solid transparent;
+}
+
+.btn-control:hover {
+    box-shadow:
+        0 0 14px rgba(0, 255, 255, 0.9),
+        0 0 25px rgba(0, 255, 255, 0.7);
+}
+
+.btn-control.close {
+    background: #ff4c4c;
+    border-color: #ff1e1e;
+}
+
+.btn-control.minimize {
+    background: #ffd93b;
+    border-color: #e6b800;
+}
+
+.btn-control.maximize {
+    background: #4cff4c;
+    border-color: #1ee61e;
+}
+
+/* Corpo da janela */
+.window-body {
+    padding: 40px 30px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* <-- importante */
+    overflow-y: auto;        /* <-- permite scroll vertical */
+    max-height: 80vh;        /* <-- limita a altura à tela */
+}
+
+/* Main Panel */
+.main-panel {
+    width: 100%;
+}
+
+/* Cabeçalho do painel */
+.panel-header {
+    margin-bottom: 40px;
+}
+
+/* Título Neon */
+.neon-title {
+    font-family: 'Michroma', sans-serif;
+    font-weight: 400;
+    font-size: 4em;
+    margin: 0;
+    color: var(--cor-texto-principal);
+    text-shadow:
+        0 0 15px var(--azul-titulo-glow),
+        0 0 30px var(--azul-titulo-glow);
+    letter-spacing: 2px;
+}
+
+/* Descrição */
+.description {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 300;
+    font-size: 1.2em;
+    line-height: 1.6;
+    max-width: 550px;
+    margin: 10px auto 0 auto;
+}
+
+/* Painel de conexão - botoes lado a lado */
+.connection-panel {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+/* Seção de sincronização */
+.sync-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    /* --- BORDAS DE DEPURACAO TEMPORARIAS --- */
-    border: 2px solid green; /* Verifique o tamanho e posicionamento do container */
-    /* --- FIM BORDAS DE DEPURACAO --- */
 }
 
-/* Tipografia */
-.main-title {
-    font-family: 'Michroma', sans-serif; /* Fonte para o título principal */
-    font-weight: 400; /* Regular (único peso) */
-    font-size: 4em; /* Tamanho grande para o título */
-    margin-bottom: 20px;
-    color: var(--cor-texto-principal);
-    text-shadow: 0 0 15px var(--azul-titulo-glow), 0 0 25px var(--azul-titulo-glow); /* Efeito de brilho neon no título */
-    letter-spacing: 2px; /* Espaçamento entre letras para efeito digital */
-}
-
-.description {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 300; /* Light */
-    font-size: 1.2em;
-    line-height: 1.6;
-    margin-bottom: 40px;
-    max-width: 500px; /* Limita a largura do texto para melhor leitura */
-}
-
-/* Grupo de Botões de Autenticação (lado a lado) */
-.auth-buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 25px; /* Espaçamento entre os botões */
-    margin-bottom: 30px; /* Espaço antes do botão Sync-Now */
-    flex-wrap: wrap; /* Permite que os botões quebrem a linha em telas menores */
-    justify-content: center;
-}
-
-/* Estilo Base para Todos os Botões */
+/* Botões base */
 .btn {
     background-color: var(--azul-botao-normal);
     color: var(--cor-texto-principal);
     border: none;
-    padding: 18px 35px;
-    border-radius: 8px; /* Cantos arredondados */
+    padding: 13px 30px;
+    border-radius: 8px;
     font-family: 'Rajdhani', sans-serif;
-    font-weight: 600; /* Semi-Bold para o texto do botão */
+    font-weight: 600;
     font-size: 1.3em;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-    text-transform: uppercase; /* Texto em maiúsculas */
-    box-shadow: 0 0 5px rgba(0, 255, 255, 0.3); /* Sutil glow inicial */
-    min-width: 220px; /* Garante largura mínima para botões */
+    text-transform: uppercase;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    min-width: 22px;
 }
 
 .btn:hover {
-    background-color: var(--azul-botao-hover);
-    box-shadow: 0 0 20px var(--azul-botao-hover), 0 0 30px rgba(0, 255, 255, 0.5); /* Glow mais intenso no hover */
-    transform: translateY(-3px); /* Efeito de leve elevação */
-}
-
-/* Estilo Específico para o Botão Sync-Now */
-.btn-sync-now {
-    background-color: var(--azul-botao-normal); /* Mesmo azul dos outros botões */
-    color: var(--cor-texto-principal);
-    padding: 18px 50px; /* Mais largo */
-    font-size: 1.4em; /* Um pouco maior */
-    min-width: 250px; /* Garante largura mínima */
-}
-
-.btn-sync-now:hover {
     background-color: var(--azul-botao-hover);
     box-shadow: 0 0 20px var(--azul-botao-hover), 0 0 30px rgba(0, 255, 255, 0.5);
     transform: translateY(-3px);
 }
 
-/* ESTADOS DOS BOTÕES (conectado / erro) - para futura implementação JS */
+/* Botão Sync-Now com padding maior e largura mínima */
+.btn-sync-now {
+    padding: 13px 30px;
+    font-size: 1.4em;
+    min-width: 25px;
+}
+
+/* Estados dos botões - conectado */
 .btn.connected {
     background-color: var(--verde-conectado);
     cursor: default;
-    box-shadow: 0 0 20px var(--verde-sucesso-glow), 0 0 30px rgba(57, 255, 20, 0.5); /* Glow verde intenso para conectado */
+    box-shadow: 0 0 20px var(--verde-sucesso-glow), 0 0 30px rgba(57, 255, 20, 0.5);
     opacity: 0.9;
-    transform: none; /* Remove elevação */
+    transform: none;
 }
 
 .btn.connected:hover {
-    background-color: var(--verde-conectado); /* Não muda no hover quando conectado */
+    background-color: var(--verde-conectado);
     box-shadow: 0 0 20px var(--verde-sucesso-glow), 0 0 30px rgba(57, 255, 20, 0.5);
 }
 
-/* MENSAGENS DE FEEDBACK */
+/* Mensagens de feedback */
 .feedback-message {
     margin-top: 30px;
     padding: 18px 25px;
@@ -141,13 +229,13 @@ body {
 }
 
 .feedback-message.success {
-    background-color: rgba(57, 255, 20, 0.15); /* Fundo semi-transparente do verde neon */
+    background-color: rgba(57, 255, 20, 0.15);
     border: 1px solid var(--verde-sucesso-glow);
     box-shadow: 0 0 15px var(--verde-sucesso-glow);
 }
 
 .feedback-message.error {
-    background-color: rgba(255, 51, 51, 0.15); /* Fundo semi-transparente do vermelho */
+    background-color: rgba(255, 51, 51, 0.15);
     border: 1px solid var(--vermelho-erro);
     box-shadow: 0 0 15px var(--vermelho-erro);
 }
@@ -157,22 +245,38 @@ body {
 }
 
 /* Media Queries para Responsividade */
+@media (max-width: 720px) {
+    .window-frame {
+        width: 95vw;
+    }
+    .connection-panel {
+        gap: 20px;
+    }
+}
+
 @media (max-width: 600px) {
-    .main-title {
+    .neon-title {
         font-size: 3em;
     }
     .description {
         font-size: 1em;
     }
-    .auth-buttons {
-        flex-direction: column; /* Botões um abaixo do outro em telas pequenas */
+    .connection-panel {
+        flex-direction: column;
         gap: 15px;
     }
     .btn {
         font-size: 1.1em;
-        padding: 15px 25px;
-        min-width: unset; /* Remove largura mínima em telas pequenas */
-        width: 100%; /* Ocupa a largura total disponível */
+        padding: 5px 15px;
+        min-width: none;
+        width: 10%;
+    }
+    .playlist-btn {
+        margin: 8px 10px;
+        min-width: unset;
+        padding: 2px 5px;
+        font-size: 1.1em;
+        text-transform: none;
     }
     .btn-sync-now {
         font-size: 1.2em;
@@ -183,10 +287,59 @@ body {
 }
 
 @media (max-width: 400px) {
-    .main-title {
+    .neon-title {
         font-size: 2.5em;
     }
-    .main-container {
-        padding: 20px 15px;
+    .window-frame {
+        padding: 10px;
     }
+}
+
+
+/* Lista de playlists discreta dentro do layout */
+#playlist-selection {
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  text-align: left;
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--cor-texto-principal);
+}
+
+#playlists-container {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.playlist-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background-color: #111;
+  color: var(--cor-texto-principal);
+  border: none;
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1em;
+  box-shadow: 0 0 5px var(--azul-titulo-glow);
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.playlist-btn:hover,
+.playlist-btn.selected {
+  background-color: var(--azul-botao-hover);
+  box-shadow: 0 0 15px var(--azul-botao-hover), 0 0 15px rgba(0, 255, 255, 0.7);
+}
+
+#playlists-container li:hover {
+  background-color: var(--azul-botao-hover);
+  box-shadow: 0 0 15px var(--azul-botao-hover), 0 0 15px rgba(0, 255, 255, 0.7);
+}
+
+#playlists-container li.selected {
+  background-color: var(--azul-botao-hover);
+  box-shadow: 0 0 15px var(--azul-botao-hover), 0 0 15px rgba(0, 255, 255, 0.7);
 }

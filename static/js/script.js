@@ -1,84 +1,118 @@
 // static/js/script.js
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Seleciona os botões de autenticação
     const spotifyBtn = document.querySelector('.btn-spotify');
     const youtubeBtn = document.querySelector('.btn-youtube');
     const syncNowBtn = document.querySelector('.btn-sync-now');
     const feedbackMessageDiv = document.getElementById('feedback-message');
 
-    /**
-     * Exibe uma mensagem de feedback na tela.
-     * @param {string} message - A mensagem a ser exibida.
-     * @param {string} type - O tipo da mensagem ('success' ou 'error').
-     */
     function showFeedbackMessage(message, type) {
         feedbackMessageDiv.textContent = message;
-        feedbackMessageDiv.className = `feedback-message ${type}`; // Adiciona a classe de tipo
-        feedbackMessageDiv.classList.remove('hidden'); // Remove a classe 'hidden' para mostrar
-        // Opcional: Ocultar a mensagem após alguns segundos
+        feedbackMessageDiv.className = `feedback-message ${type}`;
+        feedbackMessageDiv.classList.remove('hidden');
         setTimeout(() => {
             feedbackMessageDiv.classList.add('hidden');
-            feedbackMessageDiv.textContent = ''; // Limpa o texto
-        }, 5000); // Mensagem some após 5 segundos
+            feedbackMessageDiv.textContent = '';
+        }, 5000);
     }
 
-    // Adiciona event listener para o botão Spotify
     if (spotifyBtn) {
         spotifyBtn.addEventListener('click', function() {
-            // Redireciona para a rota de login do Spotify no Flask
             window.location.href = '/login/spotify';
-            // Opcional: Mostrar uma mensagem enquanto redireciona
             showFeedbackMessage('Redirecionando para o Spotify...', 'success');
         });
     }
 
-    // Adiciona event listener para o botão YouTube
     if (youtubeBtn) {
         youtubeBtn.addEventListener('click', function() {
-            // Redireciona para a rota de login do YouTube no Flask
             window.location.href = '/login/youtube';
-            // Opcional: Mostrar uma mensagem enquanto redireciona
             showFeedbackMessage('Redirecionando para o YouTube...', 'success');
         });
     }
 
-    // Adiciona event listener para o botão Sync-Now
     if (syncNowBtn) {
         syncNowBtn.addEventListener('click', function() {
-            // Redireciona para a rota de sincronização no Flask
-            window.location.href = '/sync';
-            // Opcional: Mostrar uma mensagem enquanto inicia a sincronização
+            // Obtém a playlist selecionada via botão ativo
+            const selectedBtn = document.querySelector('.playlist-btn.selected');
+            if (!selectedBtn) {
+                showFeedbackMessage('Por favor, selecione uma playlist para sincronizar.', 'error');
+                return;
+            }
+            const playlistId = selectedBtn.dataset.playlistId;
+            window.location.href = `/sync?playlist_id=${playlistId}`;
             showFeedbackMessage('Iniciando sincronização...', 'success');
         });
     }
 
-    // --- Lógica para verificar o status de autenticação (simulação) ---
-    // Em uma aplicação real, você passaria o status de autenticação do Flask para o HTML
-    // e o JavaScript leria isso. Por enquanto, vamos simular.
+    // Função para carregar playlists Spotify via AJAX
+    async function loadSpotifyPlaylists() {
+        const playlistsContainer = document.getElementById('playlists-container');
+        playlistsContainer.innerHTML = '<p>Carregando playlists...</p>';
 
-    // Exemplo de como você pode verificar o URL para mensagens de sucesso/erro após o callback
+        try {
+            const response = await fetch('/spotify-playlists');
+            if (!response.ok) {
+                playlistsContainer.innerHTML = '<p>Erro ao carregar playlists.</p>';
+                return;
+            }
+            const data = await response.json();
+
+            if (data.error) {
+                playlistsContainer.innerHTML = `<p>${data.error}</p>`;
+                return;
+            }
+
+            const playlists = data.playlists;
+            if (playlists.length === 0) {
+                playlistsContainer.innerHTML = '<p>Nenhuma playlist encontrada.</p>';
+                return;
+            }
+
+            playlistsContainer.innerHTML = '';
+
+            playlists.forEach(pl => {
+                const btn = document.createElement('button');
+                btn.textContent = `${pl.name} (${pl.tracks_total} músicas)`;
+                btn.className = 'btn playlist-btn';
+                btn.dataset.playlistId = pl.id;
+
+                btn.addEventListener('click', () => {
+                    // Remove seleção anterior
+                    document.querySelectorAll('.playlist-btn').forEach(b => b.classList.remove('selected'));
+                    // Marca o atual como selecionado
+                    btn.classList.add('selected');
+                });
+
+                playlistsContainer.appendChild(btn);
+            });
+        } catch (err) {
+            playlistsContainer.innerHTML = '<p>Erro inesperado ao carregar playlists.</p>';
+            console.error(err);
+        }
+    }
+
+    // Ler parâmetros da URL para mostrar mensagens e estados dos botões
     const urlParams = new URLSearchParams(window.location.search);
-    const authStatus = urlParams.get('auth_status'); // Ex: ?auth_status=spotify_success
-    const authService = urlParams.get('service'); // Ex: ?service=spotify
+    const authStatus = urlParams.get('auth_status');
+    const authService = urlParams.get('service');
 
     if (authStatus && authService) {
         if (authStatus === 'success') {
             showFeedbackMessage(`Conectado ao ${authService.charAt(0).toUpperCase() + authService.slice(1)} com sucesso!`, 'success');
-            // Atualiza o estado visual do botão após sucesso
             if (authService === 'spotify' && spotifyBtn) {
                 spotifyBtn.textContent = 'Spotify Conectado';
                 spotifyBtn.classList.add('connected');
-                spotifyBtn.disabled = true; // Desabilita o botão
+                spotifyBtn.disabled = true;
+                loadSpotifyPlaylists(); // Carregar playlists após conexão
             } else if (authService === 'youtube' && youtubeBtn) {
                 youtubeBtn.textContent = 'YouTube Conectado';
                 youtubeBtn.classList.add('connected');
-                youtubeBtn.disabled = true; // Desabilita o botão
+                youtubeBtn.disabled = true;
             }
         } else if (authStatus === 'error') {
             showFeedbackMessage(`Falha na conexão com ${authService.charAt(0).toUpperCase() + authService.slice(1)}. Tente novamente.`, 'error');
         }
-        // Limpa os parâmetros da URL para que a mensagem não reapareça ao recarregar
+        // Limpa parâmetros da URL
         history.replaceState({}, document.title, window.location.pathname);
     }
 });
