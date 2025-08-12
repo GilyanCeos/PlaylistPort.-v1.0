@@ -28,8 +28,7 @@ git clone https://github.com/GilyanCeos/PlaylistPort.-v1.0.git
 
 cd PlaylistPort.-v1.0.git
 ```
-### 2. Crie e ative um ambiente virtual 
-#### (opcional mas recomendado)
+### 2. Crie e ative um ambiente virtual
 
 ```bash
 python -m venv venv
