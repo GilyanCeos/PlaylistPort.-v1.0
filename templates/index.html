@@ -20,7 +20,6 @@
     <div class="window-body">
       <main class="main-panel">
         <div class="panel-header">
-          <h1 class="neon-title">PlaylistPort.</h1>
           <p class="description">Transfira playlists entre Spotify e YouTube com poucos cliques.</p>
         </div>
 
@@ -29,12 +28,14 @@
           <button class="btn btn-youtube">Conectar com YouTube</button>
         </div>
 
+        <p class="title-sincronizar">Escolha a playlist do Spotify para sincronizar:</p>
+
         <div id="playlist-selection" style="margin: 30px 0;">
-          <h2>Escolha a playlist do Spotify para sincronizar:</h2>
-          <div id="playlists-container">
-            <p>Conecte ao Spotify para carregar suas playlists.</p>
+          <div class="playlist-accordion">
+            <h3 class="accordion-header">Minhas Playlists</h3>
+            <div id="playlists-container" class="playlist-list">
+              </div>
           </div>
-        </div>
 
         <div class="sync-section">
           <button class="btn btn-sync-now">SYNC</button>

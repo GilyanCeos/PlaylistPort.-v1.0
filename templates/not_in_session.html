@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sincronização Concluída</title>
+    <title>Falha na Sincronização</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
@@ -21,10 +21,10 @@
     <div class="window-body">
       <main class="main-panel">
         <div class="panel-header">
-        <h1 class="neon-title">Sincronização Concluída!</h1>
+        <h1 class="neon-title">Sessão não Iniciada</h1>
         <p class="description">{{ message }}</p>
     </div>
-    
+
     <div class="buttons">
             <a href="{{ url_for('index') }}" class="button primary">Voltar para a Página Inicial</a>
     </div>

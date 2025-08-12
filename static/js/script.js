@@ -77,14 +77,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.dataset.playlistId = pl.id;
 
                 btn.addEventListener('click', () => {
-                    // Remove seleção anterior
                     document.querySelectorAll('.playlist-btn').forEach(b => b.classList.remove('selected'));
-                    // Marca o atual como selecionado
                     btn.classList.add('selected');
                 });
 
                 playlistsContainer.appendChild(btn);
             });
+
+            // Lógica do accordion para expandir/recolher a lista
+            const accordionHeader = document.querySelector('.accordion-header');
+            const accordionContainer = document.querySelector('.playlist-accordion');
+
+            if (accordionHeader && accordionContainer) {
+                accordionHeader.addEventListener('click', () => {
+                    accordionContainer.classList.toggle('open');
+                });
+            }
+
         } catch (err) {
             playlistsContainer.innerHTML = '<p>Erro inesperado ao carregar playlists.</p>';
             console.error(err);

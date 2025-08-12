@@ -43,7 +43,7 @@ body.neon-theme {
     border-radius: 12px;
     box-shadow:
         0 0 10px #00ffff,
-        0 0 40px #00ffff,
+        0 0 1px #00ffff,
         inset 0 0 10px #00ffff;
     display: flex;
     flex-direction: column;
@@ -126,34 +126,52 @@ body.neon-theme {
     width: 100%;
 }
 
+/* Título Neon */
+.neon-title {
+    font-family: 'Michroma', sans-serif;
+    font-weight: 400;
+    font-size: 2em;
+    margin: 0;
+    margin-bottom: 50px;
+    color: var(--cor-texto-principal);
+    text-shadow:
+        0 0 7.5px var(--azul-titulo-glow),
+        0 0 15px var(--azul-titulo-glow);
+    letter-spacing: 1px;
+}
+
 /* Cabeçalho do painel */
 .panel-header {
     margin-bottom: 40px;
 }
 
-/* Título Neon */
-.neon-title {
-    font-family: 'Michroma', sans-serif;
-    font-weight: 400;
-    font-size: 4em;
-    margin: 0;
-    color: var(--cor-texto-principal);
-    text-shadow:
-        0 0 15px var(--azul-titulo-glow),
-        0 0 30px var(--azul-titulo-glow);
-    letter-spacing: 2px;
-}
-
 /* Descrição */
 .description {
     font-family: 'Rajdhani', sans-serif;
-    font-weight: 300;
+    font-weight: 520;
     font-size: 1.2em;
-    line-height: 1.6;
-    max-width: 550px;
+    line-height: 0;
+    max-width: 100vh;
     margin: 10px auto 0 auto;
+    text-shadow:
+        0 0 1px var(--azul-titulo-glow),
+        0 0 5px var(--azul-titulo-glow);
+    letter-spacing: 0px;
 }
 
+.title-sincronizar {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 520;
+    font-size: 1.2em;
+    line-height: 0;
+    max-width: 550px;
+    margin: 60px auto -15px -35px;
+    text-shadow:
+        0 0 1px var(--azul-titulo-glow),
+        0 0 1px var(--azul-titulo-glow);
+    letter-spacing: 0px;
+
+}
 /* Painel de conexão - botoes lado a lado */
 .connection-panel {
     display: flex;
@@ -166,8 +184,11 @@ body.neon-theme {
 /* Seção de sincronização */
 .sync-section {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-top: 30px;
+    margin-left: 40px;
 }
 
 /* Botões base */
@@ -193,35 +214,38 @@ body.neon-theme {
     transform: translateY(-3px);
 }
 
-/* Botão Sync-Now com padding maior e largura mínima */
+/* Botão Sync-Now */
 .btn-sync-now {
-    padding: 13px 30px;
+    padding: 30px 20px;
     font-size: 1.4em;
-    min-width: 25px;
+    min-width: 0px;
+    border-radius: 300px;
 }
 
 /* Estados dos botões - conectado */
 .btn.connected {
     background-color: var(--verde-conectado);
     cursor: default;
-    box-shadow: 0 0 20px var(--verde-sucesso-glow), 0 0 30px rgba(57, 255, 20, 0.5);
+    box-shadow: 0 0 10px var(--verde-sucesso-glow), 0 0 15px rgba(57, 255, 20, 0.5);
     opacity: 0.9;
     transform: none;
 }
 
 .btn.connected:hover {
     background-color: var(--verde-conectado);
-    box-shadow: 0 0 20px var(--verde-sucesso-glow), 0 0 30px rgba(57, 255, 20, 0.5);
+    box-shadow: 0 0 10px var(--verde-sucesso-glow), 0 0 15px rgba(57, 255, 20, 0.5);
 }
 
 /* Mensagens de feedback */
 .feedback-message {
     margin-top: 30px;
-    padding: 18px 25px;
+    margin-left: 25px;
+    padding: 5px 15px;
     border-radius: 8px;
     font-family: 'Rajdhani', sans-serif;
     font-weight: 600;
     font-size: 1.1em;
+    text-align-last: center;
     color: var(--cor-texto-principal);
     text-shadow: 0 0 5px var(--cor-texto-principal);
     max-width: 400px;
@@ -243,6 +267,7 @@ body.neon-theme {
 .hidden {
     display: none;
 }
+
 
 /* Media Queries para Responsividade */
 @media (max-width: 720px) {
@@ -274,8 +299,8 @@ body.neon-theme {
     .playlist-btn {
         margin: 8px 10px;
         min-width: unset;
-        padding: 2px 5px;
-        font-size: 1.1em;
+        padding: 2px 2px;
+        font-size: 0.8em;
         text-transform: none;
     }
     .btn-sync-now {
@@ -283,6 +308,7 @@ body.neon-theme {
         padding: 15px 30px;
         min-width: unset;
         width: 100%;
+        position: absolute;
     }
 }
 
@@ -296,13 +322,71 @@ body.neon-theme {
 }
 
 
-/* Lista de playlists discreta dentro do layout */
+/* Lista de playlists com cabeçalho oculto */
+.playlist-accordion {
+  border: 1px solid var(--cor-fundo-geral);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.playlist-list {
+  max-height: 200px;
+  overflow-y: auto; 
+  transition: max-height 0.3s ease-in-out;
+}
+
+/* Classe para expandir o cabeçalho */
+.playlist-accordion.expanded .playlist-list {
+  max-height: 100vh;
+}
+
 #playlist-selection {
   max-width: 600px;
   margin: 0 auto 40px auto;
   text-align: left;
   font-family: 'Rajdhani', sans-serif;
   color: var(--cor-texto-principal);
+}
+
+/* Estilos para o contêiner do cabeçalho de playlists */
+.playlist-accordion {
+  border: 1px ne var(--azul-titulo-glow);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-left: 60px;
+}
+
+/* Estilos para o cabeçalho clicável */
+.accordion-header {
+  padding: 10px;
+  background-color: var(--azul-botao-normal);
+  cursor: pointer;
+  margin: 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+   border: 2px solid #00ffff;
+    border-radius: 12px;
+    box-shadow:
+        0 0 5px #00ffff,
+        0 0 5px #00ffff,
+        inset 0 0 0px #00ffff;
+}
+
+/* Estilos para a lista de playlists */
+.playlist-list {
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+  padding: 0 5px;
+}
+
+/* Estilo para cabeçalho aberto */
+.playlist-accordion.open .playlist-list {
+  max-height: 140px;
+  overflow-y: auto;
+  padding: 0px;
 }
 
 #playlists-container {
@@ -313,13 +397,15 @@ body.neon-theme {
 
 .playlist-btn {
   display: block;
-  width: 100%;
+  width: 99%;
   text-align: left;
   background-color: #111;
   color: var(--cor-texto-principal);
-  border: none;
+  border: 1px;
   padding: 10px 15px;
   margin-bottom: 8px;
+  margin-left: 3px;
+  margin-right: 3px;
   border-radius: 6px;
   font-family: 'Rajdhani', sans-serif;
   font-size: 1.1em;
@@ -328,6 +414,7 @@ body.neon-theme {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.accordion-header:hover,
 .playlist-btn:hover,
 .playlist-btn.selected {
   background-color: var(--azul-botao-hover);

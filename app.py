@@ -152,7 +152,8 @@ def spotify_playlists():
 @app.route('/sync')
 def sync():
     if 'spotify_token' not in session or 'youtube_token' not in session:
-        return 'Por favor, autentique-se no Spotify e YouTube primeiro.'
+        message= f'Por favor, autentique-se no Spotify e YouTube primeiro.'
+        return render_template('not_in_session.html', message=message)
 
     spotify_token = session['spotify_token']
     youtube_token = session['youtube_token']
@@ -273,7 +274,7 @@ def sync():
                     json=insert_data
                 )
 
-        if add_response.status_code != 200:
+        if add_response.status_code != 401:
             videos_adicionados += 1
             print(f"Vídeo {video_id} adicionado com sucesso.")
         else:
@@ -328,7 +329,7 @@ def reverse_sync():
     create_url = f"{SPOTIFY_API_BASE_URL}/users/{user_id}/playlists"
     playlist_data = {
         'name': 'Playlist importada do YouTube',
-        'description': 'Gerada pelo Playlist Port',
+        'description': 'Gerada pelo PlaylistPort.',
         'public': False
     }
     create_response = requests.post(create_url, headers=headers_spotify, data=json.dumps(playlist_data))
