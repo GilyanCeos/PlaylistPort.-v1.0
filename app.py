@@ -284,7 +284,7 @@ def sync():
     message = f'Playlist "{playlist_name}" criada no YouTube com {videos_adicionados} de {len(items)} vídeos! ({falhas_adicao} falhas)'
     return render_template('sync_result.html', message=message)
 
-# ----- Sincronização YouTube -> Spotify -----
+# Sincronização YouTube -> Spotify --EM DESENVOLVIMENTO--
 @app.route('/reverse-sync')
 def reverse_sync():
     if 'spotify_token' not in session or 'youtube_token' not in session:
