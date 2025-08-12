@@ -24,12 +24,11 @@
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/GilyanCeos/repo-playlistport-v0.git
+git clone https://github.com/GilyanCeos/PlaylistPort.-v1.0.git
 
-cd repo-playlistport-v0.git
+cd PlaylistPort.-v1.0.git
 ```
-### 2. Crie e ative um ambiente virtual 
-#### (opcional mas recomendado)
+### 2. Crie e ative um ambiente virtual
 
 ```bash
 python -m venv venv
@@ -57,8 +56,14 @@ SPOTIFY_REDIRECT_URI=http://127.0.0.1:5000/callback/spotify
 YOUTUBE_CLIENT_ID=your_youtube_client_id
 YOUTUBE_CLIENT_SECRET=your_youtube_client_secret
 YOUTUBE_REDIRECT_URI=http://127.0.0.1:5000/callback/youtube
-YOUTUBE_API_KEY=SUA_CHAVE_DE_API_DO_YOUTUBE
+YOUTUBE_API_KEY=your_youtube_API_key
 ```
+
+Essas chaves podem ser adquiridas gratuitamente nos links:
+
+  - https://developer.spotify.com/
+  - https://console.cloud.google.com/
+
 ⚠️Importante: não compartilhe esse arquivo. Ele está protegido no .gitignore.
 
 ### 5. Execute a aplicação
@@ -67,6 +72,30 @@ YOUTUBE_API_KEY=SUA_CHAVE_DE_API_DO_YOUTUBE
 python app.py
 ```
 - Acesse http://127.0.0.1:5000/ no navegador.
+
+
+## Considerações Importantes
+
+A API do YouTube Data v3 tem um limite de requisições diárias, que geralmente é de 10.000 unidades de cota por dia. Cada chamada para a API consome uma quantidade específica dessas unidades:
+
+  - Busca por vídeo (/search): Consome 100 unidades por requisição.
+  - Criação de playlist (/playlists): Consome 50 unidades por requisição.
+  - Adição de item na playlist (/playlistItems): Consome 50 unidades por requisição.
+
+Se você está sincronizando uma playlist com, por exemplo, 100 músicas, o cálculo de cota seria:
+
+  ```bash
+  100 (para busca) x 100 (músicas) = 10.000 unidades + 
+  1 x 50 (criação da playlist) = 50 unidades + 
+  100 x 50 (adição dos vídeos) = 5.000 unidades
+
+Nesse cenário, você gastaria 15.050 unidades, excedendo o limite diário em uma única execução.
+  ```
+
+Dessa forma, o uso diário recomendado é a sincronização de 1 playlist com máximo de 50 músicas, para que tudo ocorra perfeitamente.
+
+A cota é redefinida diariamente à meia-noite (fuso horário do Pacífico, ou 4h da manhã no horário de Brasília).
+
 
 ## Contribuições
 
