@@ -1,52 +1,90 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PlaylistPort - Nuclear Neon Interface</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PlaylistPort - Nuclear Neon Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
 <body class="neon-theme">
-  <div class="window-frame">
-    <div class="window-header">
-      <div class="window-title">PlaylistPort.</div>
-      <div class="window-controls">
-        <span class="btn-control close"></span>
-        <span class="btn-control minimize"></span>
-        <span class="btn-control maximize"></span>
-      </div>
+    <div class="window-frame">
+        <div class="window-header">
+            <div class="window-title">PlaylistPort.</div>
+            <div class="window-controls">
+                <span class="btn-control close"></span>
+                <span class="btn-control minimize"></span>
+                <span class="btn-control maximize"></span>
+            </div>
+        </div>
+        <div class="window-body">
+            <main class="main-panel">
+                <div class="panel-header">
+                    <p class="description">Transfira playlists entre Spotify e YouTube com poucos cliques.</p>
+                </div>
+                
+                <div class="connection-panel">
+                    <button class="btn btn-spotify">Conectar com Spotify</button>
+                    <button class="btn btn-youtube">Conectar com YouTube</button>
+                </div>
+                
+                <p class="title-sincronizar">Escolha o conteúdo do Spotify para sincronizar:</p>
+                
+                <div class="spotify-content-sections">
+                    <!-- Playlists Salvas -->
+                    <div class="content-section">
+                        <div class="playlist-accordion" data-section="playlists">
+                            <h3 class="accordion-header">Playlists Salvas</h3>
+                            <div class="playlist-list">
+                                <div id="playlists-container" class="content-container">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Músicas Curtidas -->
+                    <div class="content-section">
+                        <div class="playlist-accordion" data-section="liked-songs">
+                            <h3 class="accordion-header">Músicas Curtidas</h3>
+                            <div class="playlist-list">
+                                <div id="liked-songs-container" class="content-container">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Álbuns Salvos -->
+              <!--     <div class="content-section">
+                        <div class="playlist-accordion" data-section="albums">
+                            <h3 class="accordion-header">Álbuns Salvos</h3>
+                            <div class="playlist-list">
+                                <div id="albums-container" class="content-container">
+                                </div>
+                            </div>
+                        </div>
+                    </div>>
+                --> 
+                    
+                    <!-- Artistas Seguidos -->
+                    <div class="content-section">
+                        <div class="playlist-accordion" data-section="artists">
+                            <h3 class="accordion-header">Artistas Seguidos</h3>
+                            <div class="playlist-list">
+                                <div id="artists-container" class="content-container">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sync-section">
+                    <button class="btn btn-sync-now">SYNC</button>
+                    <div id="feedback-message" class="feedback-message hidden"></div>
+                </div>
+            </main>
+        </div>
+        <div class="window-footer"></div>
     </div>
-    <div class="window-body">
-      <main class="main-panel">
-        <div class="panel-header">
-          <p class="description">Transfira playlists entre Spotify e YouTube com poucos cliques.</p>
-        </div>
-
-        <div class="connection-panel">
-          <button class="btn btn-spotify">Conectar com Spotify</button>
-          <button class="btn btn-youtube">Conectar com YouTube</button>
-        </div>
-
-        <p class="title-sincronizar">Escolha a playlist do Spotify para sincronizar:</p>
-
-        <div id="playlist-selection" style="margin: 30px 0;">
-          <div class="playlist-accordion">
-            <h3 class="accordion-header">Minhas Playlists</h3>
-            <div id="playlists-container" class="playlist-list">
-              </div>
-          </div>
-
-        <div class="sync-section">
-          <button class="btn btn-sync-now">SYNC</button>
-          <div id="feedback-message" class="feedback-message hidden"></div>
-        </div>
-      </main>
-    </div>
-
-    <div class="window-footer"></div>
-  </div>
-
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
